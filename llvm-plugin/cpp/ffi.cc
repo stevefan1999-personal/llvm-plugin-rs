@@ -137,7 +137,7 @@ auto passBuilderAddOptimizerLastEPCallback(
 
   Builder.registerOptimizerLastEPCallback(
       [Data = std::move(Data), Callback](llvm::ModulePassManager &PassManager,
-                                         LlvmOptLevel Opt) {
+                                         LlvmOptLevel Opt, llvm::ThinOrFullLTOPhase) {
         const auto OptFFI = getFFIOptimizationLevel(Opt);
         Callback(Data.get(), PassManager, OptFFI);
       });
@@ -154,7 +154,7 @@ auto passBuilderAddOptimizerEarlyEPCallback(
 
   Builder.registerOptimizerEarlyEPCallback(
       [Data = std::move(Data), Callback](llvm::ModulePassManager &PassManager,
-                                         LlvmOptLevel Opt) {
+                                         LlvmOptLevel Opt, llvm::ThinOrFullLTOPhase) {
         const auto OptFFI = getFFIOptimizationLevel(Opt);
         Callback(Data.get(), PassManager, OptFFI);
       });
@@ -171,7 +171,7 @@ auto passBuilderAddPipelineEarlySimplificationEPCallback(
 
   Builder.registerPipelineEarlySimplificationEPCallback(
       [Data = std::move(Data), Callback](llvm::ModulePassManager &PassManager,
-                                         LlvmOptLevel Opt) {
+                                         LlvmOptLevel Opt, llvm::ThinOrFullLTOPhase) {
         const auto OptFFI = getFFIOptimizationLevel(Opt);
         Callback(Data.get(), PassManager, OptFFI);
       });
